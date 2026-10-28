@@ -106,16 +106,31 @@ function displayPokemon(pokemon) {
   const typeUrl = pokemon?.types[0]?.type?.url || "No url found";
   console.log(typeUrl);
 
+  // 2. Map through all types (handles single or dual-type Pokémon!)
+  const typesListHTML = pokemon.types
+    .map((typeInfo) => {
+      const slot = typeInfo.slot;
+      const typeName = typeInfo.type.name;
+      const typeUrl = typeInfo.type.url;
+
+      return `<li>Slot ${slot}: <a href="${typeUrl}" target="_blank">${typeName.toUpperCase()}</a></li>`;
+    })
+    .join("");
+
   //inserting data to html
   apidata.innerHTML = `
-  <h2>Name : ${name.toUpperCase()} </h2>
-  <img src="${front_default}" alt="${name}" /> 
-  <h3>Abilities:</h3>
+ <h2>Name: ${name.toUpperCase()}</h2>
+    <img src="${front_default}" alt="${name}" /> 
+    
+    <h3>Abilities:</h3>
     <ul>
       ${abilitiesListHTML}
     </ul>
 
-    <h3>Slot ID: ${slotId} and Type URL: <a href="${typeUrl}" target="_blank">link</a></h3>
+    <h3>Types:</h3>
+    <ul>
+      ${typesListHTML}
+    </ul>
   `;
 }
 //unless until you not get or fetch data on console never ever pass in .innerHtml it will provide error and sometime silence error
