@@ -5,18 +5,42 @@ const apidata = document.querySelector("#getapi");
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 
-//based on name ditto if we search then it will render other wise error or pokemon not found will display
+// 1. Click Event for Button
 searchBtn.addEventListener("click", () => {
-  const pokemonName = searchInput.value.trim().toLowerCase();
-  if (pokemonName) {
-    getApi(pokemonName); // Pass the typed name into our function!
+  handleSearch();
+});
+// 2. Keydown Event for "Enter" Key
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSearch();
   }
 });
 
-//get api
+// Helper function to keep our search logic DRY (Don't Repeat Yourself)
+function handleSearch() {
+  const pokemonName = searchInput.value.trim().toLowerCase();
+  if (pokemonName) {
+    getApi(pokemonName);
+  }
+}
+
+//based on name ditto if we search then it will render other wise error or pokemon not found will display
+// Listen for Enter key on the input field
+// searchInput.addEventListener("keydown", (event) => {
+//   if (event.key === "Enter") {
+//     const pokemonName = searchInput.value.trim().toLowerCase();
+//     if (pokemonName) {
+//       getApi(pokemonName); // Pass the typed name into our function!
+//     }
+//   }
+// });
+
+// 3. Get API with Loading State
 // Make getApi accept a parameter dynamically
 async function getApi(query) {
   try {
+    // 1. Show loading state immediately before fetching
+    apidata.innerHTML = `<p style="color: gray;">Searching for ${query}...</p>`;
     // Dynamically inject the user's search query into the URL
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
 
@@ -34,8 +58,8 @@ async function getApi(query) {
     apidata.innerHTML = `<p style="color: red;">Pokémon not found! Try another name.</p>`;
   }
 }
-// Load Ditto by default when the page first opens
-getApi("ditto");
+// Load Ditto by default when the page first opens, Default load on startup
+getApi("pikachu");
 
 //Start completely blank until the user searches
 // Delete this line so it doesn't run on page load!
