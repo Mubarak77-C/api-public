@@ -76,16 +76,25 @@ function displayPokemon(pokemon) {
     name,
     sprites: { front_default },
   } = pokemon;
-  console.log(name);
-  console.log(front_default);
+  //   console.log(name);
+  //   console.log(front_default);
 
-  // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
-  const firstAbility =
-    pokemon?.abilities?.[0]?.ability?.name || "No ability found";
+  //   // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
+  //   const firstAbility =
+  //     pokemon?.abilities?.[0]?.ability?.name || "No ability found";
 
-  //movie object fetching title
-  const fetcharr = pokemon.types[0].slot;
-  console.log(fetcharr);
+  //by map
+  // 1. Map through the abilities array and build an array of <li> strings, then .join('') them
+  const abilitiesListHTML = pokemon.abilities
+    .map((item) => {
+      return `<li>${item.ability.name}</li>`;
+    })
+    .join(""); // Crucial: removes the commas between array items!
+
+  // Other properties
+  ///slot id and url
+  const slotId = pokemon.types[0].slot;
+  console.log(slotId);
 
   //   const typeUrl = pokemon.types[0].type.url;
   //   console.log(typeUrl);
@@ -94,16 +103,20 @@ function displayPokemon(pokemon) {
   //   console.log(typeName);
 
   //doing in std industrial
-  const fetchType = pokemon?.types[0]?.type?.url || "No url found";
-  console.log(fetchType);
+  const typeUrl = pokemon?.types[0]?.type?.url || "No url found";
+  console.log(typeUrl);
 
   //inserting data to html
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
   <img src="${front_default}" alt="${name}" /> 
-  <h3>array fetch: ${firstAbility}</h3>
-  <h3>slot ID: ${fetcharr} and type url: <a href="${fetchType}" target="_blank">link</a></h3> 
+  <h3>Abilities:</h3>
+    <ul>
+      ${abilitiesListHTML}
+    </ul>
+
+    <h3>Slot ID: ${slotId} and Type URL: <a href="${typeUrl}" target="_blank">link</a></h3>
   `;
 }
 //unless until you not get or fetch data on console never ever pass in .innerHtml it will provide error and sometime silence error
-// <!--  <h3>slot id: ${fetcharr} and type url:<a href="${typeUrl}">link</a></h3> -->
+// <!--  <h3>slot id: ${slotId} and type url:<a href="${typeUrl}">link</a></h3> -->
