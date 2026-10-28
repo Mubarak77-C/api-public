@@ -25,9 +25,13 @@ function displayPokemon(pokemon) {
   //   const spriteUrl = pokemon.sprites.front_default;
 
   //industrial std keep it once place rather decalation
-  const { name, sprites } = pokemon;
+  // Destructuring name and drilling straight into sprites.front_default
+  const {
+    name,
+    sprites: { front_default },
+  } = pokemon;
   console.log(name);
-  console.log(sprites.front_default);
+  console.log(front_default);
 
   // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
   const firstAbility =
@@ -50,7 +54,7 @@ function displayPokemon(pokemon) {
   //inserting data to html
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
-  <img src="${sprites.front_default}" alt="${name}" /> 
+  <img src="${front_default}" alt="${name}" /> 
   <h3>array fetch: ${firstAbility}</h3>
   <h3>slot id: ${fetcharr} and type url: <a href="${fetchType}" target="_blank">link</a></h3> 
   `;
