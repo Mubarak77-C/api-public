@@ -20,15 +20,21 @@ async function getApi() {
 getApi();
 
 function displayPokemon(pokemon) {
-  console.log("Full abilities array:", pokemon.abilities); // Check this in console!
-  const name = pokemon.name;
-  const spriteUrl = pokemon.sprites.front_default;
+  //   console.log("Full abilities array:", pokemon.abilities); // Check this in console!
+  //   const name = pokemon.name;
+  //   const spriteUrl = pokemon.sprites.front_default;
+
+  //industrial std keep it once place rather decalation
+  const { name, sprites } = pokemon;
+  console.log(name);
+  console.log(sprites.front_default);
+
   // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
   const firstAbility =
     pokemon?.abilities?.[0]?.ability?.name || "No ability found";
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
-  <img src ="${spriteUrl}" alt="${name}"  />
+  <img src ="${sprites}" alt="${name}"  /> 
   <h3>array fetch: ${firstAbility}</h3> <!-- alt is here as text i wrote here alt where it place on img not h3 tag  -->
   `;
 }
