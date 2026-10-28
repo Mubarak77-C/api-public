@@ -50,9 +50,9 @@ function displayPokemon(pokemon) {
   //inserting data to html
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
-  <img src ="${sprites}" alt="${name}"  /> 
-  <h3>array fetch: ${firstAbility}</h3> <!-- alt is here as text i wrote here alt where it place on img not h3 tag  -->
- <h3>slot id: ${fetcharr} and type url:<a href="${fetchType}">link</a></h3> 
+  <img src="${sprites.front_default}" alt="${name}" /> 
+  <h3>array fetch: ${firstAbility}</h3>
+  <h3>slot id: ${fetcharr} and type url: <a href="${fetchType}" target="_blank">link</a></h3> 
   `;
 }
 //unless until you not get or fetch data on console never ever pass in .innerHtml it will provide error and sometime silence error
