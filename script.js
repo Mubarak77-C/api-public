@@ -32,9 +32,28 @@ function displayPokemon(pokemon) {
   // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
   const firstAbility =
     pokemon?.abilities?.[0]?.ability?.name || "No ability found";
+
+  //movie object fetching title
+  const fetcharr = pokemon.types[0].slot;
+  console.log(fetcharr);
+
+  //   const typeUrl = pokemon.types[0].type.url;
+  //   console.log(typeUrl);
+
+  //   const typeName = pokemon.types[0].type.name;
+  //   console.log(typeName);
+
+  //doing in std industrial
+  const fetchType = pokemon?.types[0]?.type?.url || "No ability found";
+  console.log(fetchType);
+
+  //inserting data to html
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
   <img src ="${sprites}" alt="${name}"  /> 
   <h3>array fetch: ${firstAbility}</h3> <!-- alt is here as text i wrote here alt where it place on img not h3 tag  -->
+ <h3>slot id: ${fetcharr} and type url:<a href="${fetchType}">link</a></h3> 
   `;
 }
+//unless until you not get or fetch data on console never ever pass in .innerHtml it will provide error and sometime silence error
+// <!--  <h3>slot id: ${fetcharr} and type url:<a href="${typeUrl}">link</a></h3> -->
