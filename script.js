@@ -23,11 +23,12 @@ function displayPokemon(pokemon) {
   console.log("Full abilities array:", pokemon.abilities); // Check this in console!
   const name = pokemon.name;
   const spriteUrl = pokemon.sprites.front_default;
-  const firstAbility = pokemon.abilities[0].ability.name;
-
+  // Safe navigation: if any part of this path is missing, it returns undefined instead of crashing
+  const firstAbility =
+    pokemon?.abilities?.[0]?.ability?.name || "No ability found";
   apidata.innerHTML = `
   <h2>Name : ${name.toUpperCase()} </h2>
   <img src ="${spriteUrl}" alt="${name}"  />
-  <h3>array fetch: ${firstAbility} alt=${name}</h3>
+  <h3>array fetch: ${firstAbility}</h3> <!-- alt is here as text i wrote here alt where it place on img not h3 tag  -->
   `;
 }
